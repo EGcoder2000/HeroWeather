@@ -1,0 +1,26 @@
+<div class="container container-weatherPage">
+    <div id="searchContainer" class="row no-gutters">
+        <div class="col-12 col-md-6 mx-auto">
+            <div class="ng-autocomplete w-100 autocomplete">
+                <ng-autocomplete  [placeHolder]="placeholderText" [data]="cities" [searchKeyword]="keyword" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.LocalizedName"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="app-cityWeather" class="row no-gutters my-5">
+        <section class="col-12 col-md-11 mx-auto">
+            <app-cityWeather></app-cityWeather>
+        </section>
+    </div>
+</div>

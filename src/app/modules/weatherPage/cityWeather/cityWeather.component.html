@@ -1,0 +1,56 @@
+<div *ngIf="doneLoadingWeatherData">
+    <div *ngIf="cityCurrentWeather && cityForecast" [ngClass]="{'d-none': !doneLoadingImages || !doneLoadingDelay}">
+        <div id="headerCityContainer">
+            <div id="cityCurrentWeather" class="d-flex align-items-center">
+                <div id="weatherImage">
+                    <img [src]="sharedFunctionsService.getIconPath(cityCurrentWeather?.WeatherIcon)" [alt]="cityCurrentWeather?.WeatherText"
+                        id="currentWeatherImg" (load)="onImageLoad($event.target.id)">
+                </div>
+                <div id="weatherDetails" class="text-center ml-3">
+                    <div id="cityName">{{currentCity?.LocalizedName}}</div>
+                    <div id="cityDegrees">{{cityCurrentWeather?.Temperature.Imperial.Value | temperatureConvertor: settingUnit }}</div>
+                </div>
+            </div>
+
+            <div id="unitFav" class="d-flex flex-row align-items-baseline">
+                <div id="chooseUnitContainer" class="form-group mr-4">
+                    <select id="chooseUnit" class="form-control" aria-label="Choose temperature unit" (change)="onUnitChange($event.target.value)">
+                        <option value="C" [selected]="settingUnit === 'C'">C</option>
+                        <option value="F" [selected]="settingUnit === 'F'">F</option>
+                    </select>
+
+                </div>
+                <div id="addFavorite">
+                    <svg [ngClass]="(isFavorite)?'heart-active':'heart-disabled'" (click)="(isFavorite)?onFavoriteClick('delete'):onFavoriteClick('add')"
+                        class="heart" viewBox="0 0 32 29.6">
+                        <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="weatherDescription" class="my-3 text-center">
+            <h1>{{cityCurrentWeather?.WeatherText}}</h1>
+        </div>
+        <div *ngIf="cityForecast" id="forecast" class="d-flex justify-content-between flex-wrap">
+            <div *ngFor="let day of cityForecast?.DailyForecasts; index as i" class="city-container d-flex flex-column align-items-center p-3 my-2 mx-auto">
+                <span class="mb-1 city-day">{{sharedFunctionsService.getWeekday(day.EpochDate)}}</span>
+                <span class="city-temp">{{day.Temperature.Minimum.Value | temperatureConvertor: settingUnit}} - {{day.Temperature.Maximum.Value |
+                    temperatureConvertor: settingUnit}}</span>
+                <img class="my-2" [src]="sharedFunctionsService.getIconPath(day.Day.Icon)" [id]="'forecastWeatherImg-' + (i+1)" [alt]="day.Day.IconPhrase"
+                    (load)="onImageLoad($event.target.id)">
+                <span class="text-center">{{day.Day.IconPhrase}}</span>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!cityCurrentWeather || !cityForecast" class="w-100 mt-5 text-center">
+        <p>Unfortunately our Weather services are not available currently. Please come back later on.</p>
+        <a id="accuLink" href="https://www.accuweather.com">Go to AccuWeather.com</a>
+    </div>
+</div>
+<div *ngIf="!doneLoadingDelay 
+|| (!doneLoadingWeatherData 
+|| (!doneLoadingImages && (cityCurrentWeather && currentCity)))" class="w-100 mt-5 text-center">
+    <app-loading></app-loading>
+</div>

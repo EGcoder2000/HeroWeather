@@ -1,0 +1,25 @@
+<div class="container">
+    <div *ngIf="doneLoadingDelay && favoritesCurrentWeather" [ngClass]="{'d-none': !doneLoadingImages}">
+        <div class="my-3 text-center">
+            <h1>Favorites</h1>
+        </div>
+        <div *ngIf="favoritesCurrentWeather.length" id="forecast" class="d-flex flex-wrap">
+            <div *ngFor="let favorite of favoritesCurrentWeather; index as i" (click)="redirectToCity(favorite.city.Key)" class="fav-container d-flex flex-column align-items-center p-3 my-2 mx-auto"
+                attr.aria-label="Press in order to redirect to {{favorite.city.LocalizedName}} page">
+                <span class="mb-1 city-name">{{favorite.city.LocalizedName}}</span>
+                <span class="city-temp">{{favorite.currentWeather.Temperature.Imperial.Value | temperatureConvertor: settingUnit}}</span>
+                <img class="my-2" [src]="sharedFunctionsService.getIconPath(favorite.currentWeather.WeatherIcon)" [id]="'favoriteImage-' + (i+1)" (load)="onImageLoad($event.target.id)"
+                    [alt]="favorite.currentWeather.WeatherText">
+                <span>{{favorite.currentWeather.WeatherText}}</span>
+            </div>
+        </div>
+        <div *ngIf="!favoritesCurrentWeather.length" class="text-center">
+            No favorites to display!
+        </div>
+    </div>
+    <div id="loadingContainer" class="d-flex justify-content-center align-items-center"
+    *ngIf="!doneLoadingDelay 
+    || (!doneLoadingImages && favoritesCurrentWeather.length)">
+        <app-loading></app-loading>
+    </div>
+</div>

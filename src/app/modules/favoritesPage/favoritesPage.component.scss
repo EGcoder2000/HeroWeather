@@ -1,0 +1,19 @@
+#loadingContainer{
+    min-height: 70vh;
+}
+.fav-container{
+    width: 185px;
+    min-height: 190px;
+    background-color: #384366;
+    opacity: 0.95;
+    border-radius: 15px;
+    cursor: pointer;
+
+    .city-name{
+        font-size: 150%;
+    }
+    
+    .city-temp{
+        font-size: 120%;
+    }
+}

@@ -1,0 +1,8 @@
+<div *ngIf="errorMsg" class="backdrop"></div>
+<div *ngIf="errorMsg" class="alert-container d-flex flex-column align-items-center">
+  <h1>Something went wrong :(</h1>
+  <div class="my-4"><p>{{errorMsg}}</p></div>
+  <div class="alert-msg-actions">
+    <button class="btn btn-primary" (click)="onClose()">Close</button>
+  </div>
+</div>

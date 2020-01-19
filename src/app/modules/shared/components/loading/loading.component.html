@@ -1,0 +1,5 @@
+<div class="text-center" [ngClass]="{'d-none': !doneLoadingImages}">
+    <img id="loadingImage" class="mb-4" src="assets/images/01-s.png" 
+    (load)="onImageLoad()" alt="Loading icon"> 
+    <h1>Loading...</h1>
+</div>

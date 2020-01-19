@@ -1,0 +1,21 @@
+<div class="header fixed-top">
+  <div class="container">
+    <div class="row no-gutters">
+      <header class="col-12">
+        <app-header></app-header>
+      </header>
+    </div>
+  </div>
+</div>
+
+<div class="content  d-xl-flex justify-content-xl-center align-items-xl-center">
+  <div class="container content-container">
+    <div class="row no-gutters">
+      <section class="col-12 router-outlet">
+        <router-outlet></router-outlet>
+      </section>
+    </div>
+  </div>
+</div>
+
+<app-alert *ngIf="errorMsg" [errorMsg]="errorMsg"></app-alert>

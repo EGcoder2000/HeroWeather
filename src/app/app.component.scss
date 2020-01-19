@@ -1,0 +1,17 @@
+.header{
+    height:50px;
+    background-color: white;
+}
+
+
+.content{
+    margin-top:50px;
+    width: 100vw !important;
+    height: calc(100vh - 50px) ;
+    overflow: auto;
+    color: white;
+    background-image: url("/assets/images/back-pic.jpg");
+    background-size: cover;
+    font-family: sans-serif;
+}
+

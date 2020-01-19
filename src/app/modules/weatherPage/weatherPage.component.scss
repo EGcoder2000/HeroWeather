@@ -1,0 +1,37 @@
+.container-weatherPage{
+    margin-top: 30px;
+}
+
+:host ::ng-deep {
+    
+    .autocomplete-container:not(.active) {
+        input{
+            border-radius: 25px !important;
+        }
+    }
+
+    .autocomplete-container{
+        box-shadow: unset !important;
+        input::placeholder {
+            text-align: center;
+        }
+    }
+
+    .autocomplete-container .suggestions-container .complete-selected, 
+    .autocomplete-container .suggestions-container ul li:hover,
+    .autocomplete-container .suggestions-container ul li:focus,
+    {
+        background-color: #384366;
+        opacity: 0.95;
+        color:white;
+    }
+  }
+
+
+@media screen and (min-width: 1200px) {
+    //targeting bootsrap xl 
+    #app-cityWeather{
+        min-height: 369px;
+        min-width: 1080px;
+    }
+}
