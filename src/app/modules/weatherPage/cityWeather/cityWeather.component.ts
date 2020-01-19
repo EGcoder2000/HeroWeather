@@ -101,7 +101,6 @@ export class CityWeatherComponent implements OnInit {
                                 this.doneLoadingImages = true;
                             },
                             () => {
-                                this.doneLoadingWeatherData = true;
                             }
                         ));
             }));
